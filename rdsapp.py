@@ -5,10 +5,10 @@ from mysql.connector import Error
 app = Flask(__name__)
 
 db_config = {
-    'host': 'clarusway.c1c8mokm63q3.us-east-1.rds.amazonaws.com',
+    'host': '{{resolve:ssm:/database/phonebook/dbname:1}}',
     'user': 'admin',
-    'password': 'Clarusway_1',
-    'database': 'clarusway'
+    'password': '{{resolve:ssm-secure:/database/phonebook/password:1}}',
+    'database': '{{resolve:ssm-secure:/database/phonebook/username:1}}'
 }
 
 def get_connection():
@@ -25,21 +25,17 @@ def setup_database():
     if connection:
         cursor = connection.cursor()
         try:
-            # Delete the table
-            drop_table = 'DROP TABLE IF EXISTS users;'
-            cursor.execute(drop_table)
-            
-            # Create the table
+            # Create the table if it doesn't exist
             users_table = """ 
-            CREATE TABLE users(
+            CREATE TABLE IF NOT EXISTS users(
             username VARCHAR(255) NOT NULL PRIMARY KEY,
             email VARCHAR(255));
             """
             cursor.execute(users_table)
             
-            # Insert the datas
+            # Insert the datas if they don't exist
             data = """
-            INSERT INTO users (username, email)
+            INSERT IGNORE INTO users (username, email)
             VALUES
                 ('dora', 'dora@amazon.com'),
                 ('cansın', 'cansın@google.com'),
@@ -57,6 +53,7 @@ def setup_database():
             cursor.close()
             connection.close()
 
+# Call setup_database only when starting the app
 setup_database()
 
 def find_emails(keyword):
@@ -70,7 +67,7 @@ def find_emails(keyword):
         cursor.close()
         connection.close()
         if not result:
-            return [("Not Found")]
+            return [("Not Found", "Not Found")]
         return result
 
 def insert_email(name, email):

@@ -97,8 +97,8 @@ https://sqlitebrowser.org/)
 - DB instance class     : db.t2.micro
 - Publicly accessible   : ***Yes
 - Master username       : admin
-- Master password       : Clarusway_1
--Initial DB name        : clarusway
+- Master password       : 
+-Initial DB name        : 
 
 ```
 - Create `app-with-mysql.py` the  same folder near the `app-with-sqlite.py` 
@@ -131,5 +131,9 @@ https://sqlitebrowser.org/)
 - Install `flask_mysql`.
 
 - Run application with Python
+
+## Expected Outcome
+
+![Email App Web Page](./outcome.png)
 
 

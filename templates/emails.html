@@ -2,24 +2,92 @@
 <html>
 <head>
     <title>User Emails</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ece5e5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 38px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 150px;
+        }
+        img {
+            width: 150px;
+            height: auto;
+        }
+        h1 {
+            color: darkgreen;
+        }
+        form {
+            margin: 20px 0;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-width: 300px;
+        }
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
-    <div><img style="width:200px; height:50px" src="https://clarusway.com/wp-content/uploads/2022/12/clarusway-logo-black.png" /></div>
-    <h1>Welcome to Email Database</h1>
-    <form action="#" method="post">
-        <p>
-            <label for="name">User Name : </label>
-            <input type="text" name="user_keyword" id="name">
-        </p>
-        <p><input type="submit" value="Show"></p>
-    </form>
-    {% if show_result %}
-        <h1>Result for '{{ keyword }}' </h1>
+    <div class="container">
+        <h1>Welcome to Email Database</h1>
+        <form action="#" method="post">
+            <p>
+                <label for="name">User Name: </label>
+                <input type="text" name="user_keyword" id="name">
+            </p>
+            <p><input type="submit" value="Show"></p>
+        </form>
+        {% if show_result %}
+            <h1>Result for '{{ keyword }}'</h1>
             <ul> 
-            {% for x in name_emails %}
-            <li>Username: <b>{{ x[0] }} </b>  ---- Email: <b>{{ x[1] }}</b></li>
-            {% endfor %}
+                {% for x in name_emails %}
+                <li>Username: <b>{{ x[0] }}</b> ---- Email: <b>{{ x[1] }}</b></li>
+                {% endfor %}
             </ul>
-    {% endif %}
+        {% endif %}
+        <a href="/add">Add Email</a>
+    </div>
 </body>
 </html>
