@@ -134,6 +134,8 @@ https://sqlitebrowser.org/)
 
 ## Expected Outcome
 
-![Email App Web Page](./outcome.png)
+![Email App Web Page](./mainpage.png)
 
+![Add Page](./add.png)
 
+![Delete Page](./delete.png)
