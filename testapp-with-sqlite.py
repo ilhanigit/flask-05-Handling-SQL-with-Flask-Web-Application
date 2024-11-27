@@ -63,6 +63,21 @@ def insert_email(name, email):
         else:
             response = f"User {name} already exists"
         return response
+
+def delete_email(keyword):
+    with app.app_context():
+        # Kullanıcıyı veritabanında arıyoruz
+        query = text(f"SELECT * FROM users WHERE username = '{keyword}';")
+        user = db.session.execute(query).fetchone()
+
+        if user:
+            # Kullanıcıyı silme işlemi
+            delete_query = text(f"DELETE FROM users WHERE username = '{keyword}';")
+            db.session.execute(delete_query)
+            db.session.commit()
+            return f"User '{keyword}' and their email have been successfully deleted."
+        else:
+            return f"User '{keyword}' does not exist in the database."
         
 @app.route('/', methods=['GET', 'POST'])
 def emails():
@@ -84,6 +99,14 @@ def add_email():
             return render_template('add-email.html', result_html=result_app, show_result=True)
         else:
             return render_template('add-email.html', show_result=False)
+
+@app.route('/delete', methods=['GET', 'POST'])
+def delete_user():
+    if request.method == 'POST':
+        username = request.form['username']
+        result = delete_email(username)
+        return render_template('delete-email.html', result_html=result, show_result=True)
+    return render_template('delete-email.html', show_result=False)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
