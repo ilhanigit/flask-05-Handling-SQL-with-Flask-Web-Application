@@ -1,90 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Email</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ece5e5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 38px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 150px;
-        }
-        img {
-            width: 150px;
-            height: auto;
-        }
-        h1 {
-            color: darkgreen
-        }
-        form {
-            margin: 20px 0;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 300px;
-        }
-        input[type="submit"] {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-        h3 {
-            color: #e74c3c;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-            display: block;
-            margin-top: 20px;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <h1>Add Email to the Database</h1>
-        <form action="#" method="post">
-            <p>
-                <label for="name">User Name: </label>
-                <input type="text" name="username" id="name">
-            </p>
-            <p>
-                <label for="email">User Email: </label>
-                <input type="text" name="useremail" id="email">
-            </p>
-            <p><input type="submit" value="Save"></p>
-        </form>
-        {% if show_result %}
-            <h1>Result</h1>
-            <h3>{{ result_html }}</h3>
-        {% endif %}
-        <a href="/">Back to Home</a>
+<body class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+
+    <div class="flex justify-center items-center min-h-screen p-6 gap-6">
+
+        <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-lg space-y-6">
+            <h1 class="text-2xl font-semibold text-green-600 text-center">Add New User Email</h1>
+
+            <form action="/add" method="post" class="space-y-4">
+                <div class="flex flex-col">
+                    <label for="username" class="text-lg text-gray-700">Username:</label>
+                    <input type="text" name="username" id="username" class="mt-2 p-3 border border-gray-300 rounded-lg w-full" placeholder="Enter username">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="useremail" class="text-lg text-gray-700">User Email:</label>
+                    <input type="text" name="useremail" id="useremail" class="mt-2 p-3 border border-gray-300 rounded-lg w-full" placeholder="Enter email">
+                </div>
+
+                <div class="flex justify-between gap-4">
+                    <input type="submit" value="Save" class="bg-blue-500 text-white p-3 rounded-lg cursor-pointer hover:bg-blue-400 transition duration-200 w-full">
+                </div>
+            </form>
+
+            {% if show_result %}
+            <div class="mt-4">
+                <p class="text-green-500 font-semibold">{{ get_flashed_messages()[0] }}</p>
+            </div>
+            {% endif %}
+
+            <div class="flex justify-center mt-6">
+                <a href="/" class="bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-400 transition duration-200">Back to Home</a>
+            </div>
+        </div>
+
     </div>
+
 </body>
 </html>
