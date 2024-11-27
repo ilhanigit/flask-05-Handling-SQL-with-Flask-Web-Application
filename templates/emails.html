@@ -1,93 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Emails</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ece5e5;
-            color: #333;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 38px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-top: 150px;
-        }
-        img {
-            width: 150px;
-            height: auto;
-        }
-        h1 {
-            color: darkgreen;
-        }
-        form {
-            margin: 20px 0;
-        }
-        input[type="text"] {
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            width: 100%;
-            max-width: 300px;
-        }
-        input[type="submit"] {
-            background-color: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #2980b9;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        li {
-            padding: 10px;
-            border-bottom: 1px solid #ddd;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
+        
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Welcome to Email Database</h1>
-        <form action="#" method="post">
-            <p>
-                <label for="name">User Name: </label>
-                <input type="text" name="user_keyword" id="name">
-            </p>
-            <p><input type="submit" value="Show"></p>
-        </form>
-        {% if show_result %}
-            <h1>Result for '{{ keyword }}'</h1>
-            <ul> 
-                {% for x in name_emails %}
-                <li>Username: <b>{{ x[0] }}</b> ---- Email: <b>{{ x[1] }}</b></li>
-                {% endfor %}
-            </ul>
-        {% endif %}
-        <a href="/add">Add Email</a>
+<body class="bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
+
+    <div class="flex justify-between items-start min-h-screen p-6 gap-6">
+
+        <!-- Sol Bölüm: Butonlar ve Form -->
+        <div class="w-1/3 bg-white p-6 rounded-xl shadow-lg space-y-6">
+            <h1 class="text-2xl font-semibold text-green-600 text-center">Welcome to Email Database</h1>
+
+            <!-- Form Section -->
+            <form action="#" method="post" class="space-y-4">
+                <div class="flex flex-col">
+                    <label for="name" class="text-lg text-gray-700">User Name:</label>
+                    <input type="text" name="user_keyword" id="name" class="mt-2 p-3 border border-gray-300 rounded-lg w-full" placeholder="Enter user name">
+                </div>
+                
+                <div class="flex justify-between gap-4">
+                    <input type="submit" value="Show" class="bg-blue-500 text-white p-3 rounded-lg cursor-pointer hover:bg-blue-400 transition duration-200 w-full">
+                </div>
+            </form>
+
+            <!-- Navigation Links -->
+            <div class="flex justify-between gap-4">
+                <a href="/add" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-400 transition duration-200 w-full">Add Email</a>
+                <a href="/delete" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-400 transition duration-200 w-full">Delete Email</a>
+            </div>
+        </div>
+
+        <!-- Sağ Bölüm: Sonuçlar -->
+        <div class="w-2/3 bg-white p-6 rounded-xl shadow-lg">
+            {% if show_result %}
+                <h2 class="text-xl font-semibold mt-6 mb-3 text-center text-green-600">Database</h2>
+                <ul class="space-y-2">
+                    {% for x in name_emails %}
+                    <li class="p-3 border-b border-gray-200 rounded-md bg-gray-50">
+                        <span class="font-semibold text-gray-800">Username:</span> <b>{{ x[0] }}</b> ---- 
+                        <span class="font-semibold text-gray-800">Email:</span> <b>{{ x[1] }}</b>
+                    </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="text-gray-600 text-center">No results to show.</p>
+            {% endif %}
+        </div>
+
     </div>
+
 </body>
 </html>
